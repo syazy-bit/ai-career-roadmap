@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from google import genai
 import os
 
-# Load environment variables manually (simple way)
+# Load environment variables from .env
 if os.path.exists(".env"):
     with open(".env") as f:
         for line in f:
@@ -12,10 +12,10 @@ if os.path.exists(".env"):
 
 app = Flask(__name__)
 
-# Read API key from environment
+# Read API key
 API_KEY = os.getenv("GEMINI_API_KEY")
 
-# Create Gemini client only if key exists
+# Create Gemini client if API key exists
 client = genai.Client(api_key=API_KEY) if API_KEY else None
 
 
@@ -34,49 +34,50 @@ def index():
             roadmap = """
 DEMO MODE ENABLED ✅
 
-Career Path: Software Developer (Python)
+CAREER PATH: SOFTWARE DEVELOPER (PYTHON)
 
-Skills to Learn:
+SKILLS TO LEARN:
 - Python fundamentals
 - Flask web development
 - SQL databases
-- Git & GitHub
+- Git and GitHub
 
-3-Month Plan:
-Month 1: Python basics + Git
-Month 2: Flask + SQL + small project
-Month 3: APIs + final project
-
-(This output is shown when API quota or key is unavailable.)
+3-MONTH PLAN:
+Month 1: Python basics and Git
+Month 2: Flask, SQL, and a small project
+Month 3: APIs and a final project
 """
             return render_template("index.html", roadmap=roadmap)
 
-        # 🔹 Gemini Prompt
+        # 🔹 Gemini Prompt (NO MARKDOWN)
         prompt = f"""
 You are a professional career counselor.
 
-Student details:
+STUDENT DETAILS:
 Education: {education}
 Branch: {branch}
 Interests: {interests}
 Career Goal: {goal}
 
-Create a beginner-friendly career roadmap including:
-1. Suitable career paths
-2. Skills to learn step-by-step
-3. Free learning resources
-4. A 3-month learning plan
+TASK:
+Create a beginner-friendly career roadmap.
+
+IMPORTANT RULES:
+- Do NOT use Markdown
+- Do NOT use **, ##, or tables
+- Use plain text only
+- Use headings in CAPITAL LETTERS
+- Use simple bullet points using hyphens (-)
 """
 
         try:
             response = client.models.generate_content(
-                model="models/gemini-flash-lite-latest",
-                contents=prompt
+                model="models/gemini-flash-lite-latest", contents=prompt
             )
             roadmap = response.text
 
         except Exception as e:
-            roadmap = f"⚠️ Error generating roadmap. Please try again later.\n\n{e}"
+            roadmap = f"⚠️ Error generating roadmap.\n\n{e}"
 
     return render_template("index.html", roadmap=roadmap)
 

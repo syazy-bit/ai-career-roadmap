@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Career Roadmap</title>
+
     <style>
         * {
             margin: 0;
@@ -78,17 +79,12 @@
             border-radius: 8px;
             font-size: 14px;
             transition: all 0.3s ease;
-            font-family: inherit;
         }
 
         input:focus {
             outline: none;
             border-color: #667eea;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        input::placeholder {
-            color: #999;
         }
 
         button {
@@ -101,17 +97,13 @@
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
             margin-top: 10px;
+            transition: all 0.3s ease;
         }
 
         button:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-        }
-
-        button:active {
-            transform: translateY(0);
         }
 
         .roadmap-container {
@@ -127,6 +119,7 @@
             font-weight: 600;
         }
 
+        /* ⭐ IMPORTANT FIX IS HERE */
         .roadmap-content {
             background: #f8f9fa;
             padding: 20px;
@@ -136,28 +129,10 @@
             line-height: 1.8;
             white-space: pre-wrap;
             word-wrap: break-word;
-            font-size: 14px;
-            font-family: 'Courier New', monospace;
+            font-size: 15px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             max-height: 600px;
             overflow-y: auto;
-        }
-
-        .roadmap-content::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .roadmap-content::-webkit-scrollbar-track {
-            background: #e0e0e0;
-            border-radius: 10px;
-        }
-
-        .roadmap-content::-webkit-scrollbar-thumb {
-            background: #667eea;
-            border-radius: 10px;
-        }
-
-        .roadmap-content::-webkit-scrollbar-thumb:hover {
-            background: #764ba2;
         }
 
         @media (max-width: 600px) {
@@ -170,7 +145,7 @@
             }
 
             .roadmap-content {
-                font-size: 12px;
+                font-size: 14px;
             }
         }
     </style>
@@ -179,30 +154,29 @@
 <body>
     <div class="container">
         <div class="card">
+
             <h1>🚀 AI Career Roadmap Generator</h1>
-            <p class="subtitle">Get a personalized learning path for your AI/Tech career</p>
+            <p class="subtitle">Get a personalized learning path for your tech career</p>
 
             <form method="POST">
                 <div class="form-group">
                     <label for="education">Education Level</label>
-                    <input id="education" name="education" placeholder="e.g., High School, Bachelor's, Master's"
-                        required>
+                    <input id="education" name="education" placeholder="e.g., B.Tech, Diploma, Master's" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="branch">Branch/Field</label>
-                    <input id="branch" name="branch" placeholder="e.g., Computer Science, Engineering" required>
+                    <label for="branch">Branch / Field</label>
+                    <input id="branch" name="branch" placeholder="e.g., Computer Science, IT" required>
                 </div>
 
                 <div class="form-group">
                     <label for="interests">Interests</label>
-                    <input id="interests" name="interests" placeholder="e.g., Machine Learning, Web Development"
-                        required>
+                    <input id="interests" name="interests" placeholder="e.g., Python, Web, AI" required>
                 </div>
 
                 <div class="form-group">
                     <label for="goal">Career Goal</label>
-                    <input id="goal" name="goal" placeholder="e.g., AI Engineer, Data Scientist" required>
+                    <input id="goal" name="goal" placeholder="e.g., Software Developer" required>
                 </div>
 
                 <button type="submit">Generate Roadmap</button>
@@ -214,6 +188,7 @@
                 <div class="roadmap-content">{{ roadmap }}</div>
             </div>
             {% endif %}
+
         </div>
     </div>
 </body>
